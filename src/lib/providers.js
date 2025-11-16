@@ -17,25 +17,25 @@ const PROVIDERS = {
             { code: 'au', label: 'Australia' },
             { code: 'in', label: 'India' }
         ],
-      buildUrl: ({ apiKey, q, category, country, page, pageSize }) => {
-  const params = new URLSearchParams();
+        buildUrl: ({ apiKey, q, category, country, page, pageSize }) => {
+            const params = new URLSearchParams();
 
-  if (q) {
-  
-    params.set('q', q);
-  } else {
- 
-    if (category) params.set('category', category);
-    if (country) params.set('country', country);
-  }
+            if (q) {
 
-  params.set('page', String(page || 1));
-  params.set('pageSize', String(pageSize || 12));
-  params.set('apiKey', apiKey);
+                params.set('q', q);
+            } else {
 
-  const endpoint = q ? '/everything' : '/top-headlines';
-  return `${PROVIDERS.newsapi.base}${endpoint}?${params.toString()}`;
-},
+                if (category) params.set('category', category);
+                if (country) params.set('country', country);
+            }
+
+            params.set('page', String(page || 1));
+            params.set('pageSize', String(pageSize || 12));
+            params.set('apiKey', apiKey);
+
+            const endpoint = q ? '/everything' : '/top-headlines';
+            return `${PROVIDERS.newsapi.base}${endpoint}?${params.toString()}`;
+        },
 
         normalize: (json) => {
             const total = json?.totalResults ?? 0;
